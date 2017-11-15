@@ -48,12 +48,11 @@
       			<p:outputLabel value="#{msg['pages.cadastroCliente.limiteDisp']}" />
       			<p:inputText value="#{clienteBeans.cliente.limiteDisp}"/>
 	  		</p:panelGrid>
-	  		
+	  		<br/>
 	  		<p:commandButton 	value="#{msg['pages.comuns.form.btnSalvar']}" 
 	                 			action="#{clienteBeans.salvar}"
-	                 			update=":formCliente, :formTableCliente:tabelaCliente"/>
+	                 			update=":formCliente, :formTableCliente"/>
    		</h:form>
-
    		<br/>
    		<h3><p:outputLabel value="#{msg['pages.cadastroCliente.tableTitle']}"/></h3>
    		
@@ -61,6 +60,7 @@
     		<p:dataTable	value="#{clienteBeans.clientes}"
                 			var="aux"
                 			id="tabelaCliente"
+                			scrollable="true"
                 			editable="true"
                 			paginator="true"
                 			rows="5"
@@ -70,10 +70,10 @@
                 			
       			<p:ajax event="rowEdit" listener="#{clienteBeans.onRowEdit}" update="tabelaCliente" />
       			
-      			<p:column headerText="#{msg['pages.cadastroCliente.cpf']}" filterBy="#{aux.cpf}">
+      			<p:column headerText="#{msg['pages.cadastroCliente.cpf']}" filterBy="#{aux.cpf}" filterStyle="width:150px" style="width:160px">
     				<p:cellEditor>
 						<f:facet name="output">
-							<p:outputLabel value="#{aux.cpf}" />
+							<p:outputLabel value="#{aux.cpf}"/>
 						</f:facet>
 						<f:facet name="input">
 							<p:inputText id="clienteCpf" value="#{aux.cpf}" style="width:100%" />
@@ -81,7 +81,7 @@
 					</p:cellEditor>
 	  			</p:column>
 	  			
-	  			<p:column headerText="#{msg['pages.cadastroCliente.nome']}" filterBy="#{aux.nome}">
+	  			<p:column headerText="#{msg['pages.cadastroCliente.nome']}" filterBy="#{aux.nome}" filterStyle="width:350px" style="width:360px" >
     				<p:cellEditor>
 						<f:facet name="output">
 							<p:outputLabel value="#{aux.nome}" />
@@ -92,7 +92,7 @@
 					</p:cellEditor>
 	  			</p:column>
 
-	  			<p:column headerText="#{msg['pages.cadastroCliente.endereco']}" filterBy="#{aux.endereco}">
+	  			<p:column headerText="#{msg['pages.cadastroCliente.endereco']}" filterBy="#{aux.endereco}" filterStyle="width:350px" style="width:360px">
     				<p:cellEditor>
 						<f:facet name="output">
 							<p:outputLabel value="#{aux.endereco}" />
@@ -103,7 +103,7 @@
 					</p:cellEditor>
 	  			</p:column>
 	  			
-	  			<p:column headerText="#{msg['pages.cadastroCliente.cidade']}" filterBy="#{aux.cidade}">
+	  			<p:column headerText="#{msg['pages.cadastroCliente.cidade']}" filterBy="#{aux.cidade}" filterStyle="width:200px" style="width:210px">
     				<p:cellEditor>
 						<f:facet name="output">
 							<p:outputLabel value="#{aux.cidade}" />
@@ -114,7 +114,7 @@
 					</p:cellEditor>
 	  			</p:column>
 	  			
-	  			<p:column headerText="#{msg['pages.cadastroCliente.cep']}" filterBy="#{aux.cep}">
+	  			<p:column headerText="#{msg['pages.cadastroCliente.cep']}" filterBy="#{aux.cep}" filterStyle="width:110px" style="width:120px">
     				<p:cellEditor>
 						<f:facet name="output">
 							<p:outputLabel value="#{aux.cep}" />
@@ -125,7 +125,7 @@
 					</p:cellEditor>
 	  			</p:column>
 	  			
-	  			<p:column headerText="#{msg['pages.cadastroCliente.uf']}" filterBy="#{aux.uf}">
+	  			<p:column headerText="#{msg['pages.cadastroCliente.uf']}" filterBy="#{aux.uf}" filterStyle="width:40px" style="width:50px">
     				<p:cellEditor>
 						<f:facet name="output">
 							<p:outputLabel value="#{aux.uf}" />
@@ -136,7 +136,7 @@
 					</p:cellEditor>
 	  			</p:column>
 	  			
-	  			<p:column headerText="#{msg['pages.cadastroCliente.ddd']}" filterBy="#{aux.ddd}">
+	  			<p:column headerText="#{msg['pages.cadastroCliente.ddd']}" filterBy="#{aux.ddd}" filterStyle="width:50px" style="width:60px">
     				<p:cellEditor>
 						<f:facet name="output">
 							<p:outputLabel value="#{aux.ddd}" />
@@ -147,7 +147,7 @@
 					</p:cellEditor>
 	  			</p:column>
 	  			
-	  			<p:column headerText="#{msg['pages.cadastroCliente.telefone']}" filterBy="#{aux.telefone}">
+	  			<p:column headerText="#{msg['pages.cadastroCliente.telefone']}" filterBy="#{aux.telefone}" filterStyle="width:140px" style="width:150px">
     				<p:cellEditor>
 						<f:facet name="output">
 							<p:outputLabel value="#{aux.telefone}" />
@@ -158,10 +158,10 @@
 					</p:cellEditor>
 	  			</p:column>
 	  			
-	  			<p:column headerText="#{msg['pages.cadastroCliente.limiteCred']}" filterBy="#{aux.limiteCred}">
+	  			<p:column headerText="#{msg['pages.cadastroCliente.limiteCred']}" filterBy="#{aux.limiteCred}" filterStyle="width:190px" style="width:200px">
     				<p:cellEditor>
 						<f:facet name="output">
-							<p:outputLabel value="#{aux.limiteCred}" />
+							<p:outputLabel value="R$ #{aux.limiteCred}" />
 						</f:facet>
 						<f:facet name="input">
 							<p:inputText id="clienteLimiteCred" value="#{aux.limiteCred}" style="width:100%" />
@@ -169,10 +169,10 @@
 					</p:cellEditor>
 	  			</p:column>
 	  			
-	  			<p:column headerText="#{msg['pages.cadastroCliente.limiteDisp']}" filterBy="#{aux.limiteDisp}">
+	  			<p:column headerText="#{msg['pages.cadastroCliente.limiteDisp']}" filterBy="#{aux.limiteDisp}" filterStyle="width:190px" style="width:200px">
     				<p:cellEditor>
 						<f:facet name="output">
-							<p:outputLabel value="#{aux.limiteDisp}" />
+							<p:outputLabel value="R$ #{aux.limiteDisp}" />
 						</f:facet>
 						<f:facet name="input">
 							<p:inputText id="clienteLimiteDiso" value="#{aux.limiteDisp}" style="width:100%" />
@@ -180,14 +180,14 @@
 					</p:cellEditor>
 	  			</p:column>
     
-      			<p:column style="width:70px" headerText="#{msg['pages.cadastroCliente.optionTable']}">
+      			<p:column style="width:90px" headerText="#{msg['pages.cadastroCliente.optionTable']}">
 					<p:rowEditor />
 					<p:commandLink 	id="remover" styleClass="ui-icon ui-icon-trash"
 									style="text-align:center"
 									actionListener="#{clienteBeans.remover(aux)}"
 									update="tabelaCliente" />
 	  			</p:column>
-			</p:dataTable>	
+			</p:dataTable>
 		</h:form>
 	</ui:define>
 </ui:composition>
