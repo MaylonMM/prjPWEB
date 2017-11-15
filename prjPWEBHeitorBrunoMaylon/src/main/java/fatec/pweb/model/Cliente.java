@@ -2,24 +2,37 @@ package fatec.pweb.model;
 
 import java.util.ArrayList;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
+
 /**
  * @author 0030481611007
  * @author 0030481611020
  * @author 0030481611029
  */
+
+@Entity
+@PrimaryKeyJoinColumn(name="cpf")
 public class Cliente extends Pessoa {
-    private double limiteCred;
+	private static final long serialVersionUID = 1L;
+	
+	private double limiteCred;
     private double limiteDisp;
+    @OneToMany(mappedBy="cliente")
     private ArrayList<Pedido> pedidos;
 
-    public Cliente(String cpf, String nome, double limiteCred) {
-        super(cpf, nome);
-        this.limiteCred = limiteCred;
-        limiteDisp = limiteCred;
+    public Cliente() {
         pedidos = new ArrayList<Pedido>();
+        
     }
 
-    public double getLimiteCred() {
+	public void setLimiteCred(double limiteCred) {
+		this.limiteCred = limiteCred;
+		limiteDisp = limiteCred;
+	}
+
+	public double getLimiteCred() {
         return limiteCred;
     }
 
@@ -36,6 +49,4 @@ public class Cliente extends Pessoa {
         ped.setCliente(this);
     }
     
-    //Teste do Git
-    //Outro Teste
 }

@@ -7,13 +7,17 @@ import java.util.ArrayList;
  * @author 0030481611020
  * @author 0030481611029
  */
+
 public class Vendedor extends Pessoa{
-    private double salarioBase;
+	private static final long serialVersionUID = 1L;
+	
+	private double salarioBase;
     private double comissao;
     private ArrayList<Pedido> pedidos;
 
     public Vendedor(String cpf, String nome, double salarioBase) {
-        super(cpf, nome);
+    	super.setCpf(cpf);
+        super.setNome(nome);
         this.salarioBase = salarioBase;
         pedidos = new ArrayList<Pedido>();
     }

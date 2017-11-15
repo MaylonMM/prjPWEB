@@ -2,27 +2,45 @@ package fatec.pweb.model;
 
 import java.util.ArrayList;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 /**
  * @author 0030481611007
  * @author 0030481611020
  * @author 0030481611029
  */
+
+@Entity
 public class Pedido {
+	@Id
     private int numero;
     private String dataEmissaoPedido;
     private String dataPagto;
     private boolean status;
+    @ManyToOne
     private Cliente cliente;
     private Vendedor vendedor;
     private ArrayList<ItemPedido> itens;
 
-    public Pedido(int numero, String dataEmissaoPedido) {
-        this.numero = numero;
-        this.dataEmissaoPedido = dataEmissaoPedido;
+    public Pedido() {
         itens = new ArrayList<ItemPedido>();
     }
+    
+    public ArrayList<ItemPedido> getItens() {
+		return itens;
+	}
 
-    public int getNumero() {
+	public void setItens(ArrayList<ItemPedido> itens) {
+		this.itens = itens;
+	}
+
+	public void setDataEmissaoPedido(String dataEmissaoPedido) {
+		this.dataEmissaoPedido = dataEmissaoPedido;
+	}
+
+	public int getNumero() {
         return numero;
     }
 
