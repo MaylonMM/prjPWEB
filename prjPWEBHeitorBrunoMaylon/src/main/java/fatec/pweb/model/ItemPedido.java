@@ -1,22 +1,31 @@
 package fatec.pweb.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 /**
  * @author 0030481611007
  * @author 0030481611020
  * @author 0030481611029
  */
+
+@Entity
 public class ItemPedido {
+	
+	@Id
     private int numeroItem;
     private int qtdeVendida;
     private Pedido pedido;
+    
+    @ManyToOne
     private Produto produto;
 
-    public ItemPedido(int numeroItem, int qtdeVendida) {
-        this.numeroItem = numeroItem;
-        this.qtdeVendida = qtdeVendida;
-    }
+    public void setNumeroItem(int numeroItem) {
+		this.numeroItem = numeroItem;
+	}
 
-    public int getNumeroItem() {
+	public int getNumeroItem() {
         return numeroItem;
     }
 

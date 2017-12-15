@@ -4,6 +4,9 @@
 		<class>fatec.pweb.model.Pessoa</class>
 		<class>fatec.pweb.model.Cliente</class>
 		<class>fatec.pweb.model.Pedido</class>
+		<class>fatec.pweb.model.Vendedor</class>
+		<class>fatec.pweb.model.Produto</class>
+		<class>fatec.pweb.model.ItemPedido</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/BD_prjPWEB;create=true"/>
 			<property name="javax.persistence.jdbc.user" value="user"/>

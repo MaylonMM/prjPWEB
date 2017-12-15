@@ -21,6 +21,7 @@ public class Pedido {
     private boolean status;
     @ManyToOne
     private Cliente cliente;
+    @ManyToOne
     private Vendedor vendedor;
     private ArrayList<ItemPedido> itens;
 
@@ -87,5 +88,9 @@ public class Pedido {
         this.vendedor = vendedor;
         vendedor.addPedido(this);
     }
-       
+
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+    
 }
