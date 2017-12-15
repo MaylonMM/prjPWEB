@@ -17,7 +17,6 @@ public class ItemPedido {
     private int numeroItem;
     private int qtdeVendida;
     private Pedido pedido;
-    
     @ManyToOne
     private Produto produto;
 

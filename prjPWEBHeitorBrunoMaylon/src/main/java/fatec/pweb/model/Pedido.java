@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * @author 0030481611007
@@ -23,6 +24,7 @@ public class Pedido {
     private Cliente cliente;
     @ManyToOne
     private Vendedor vendedor;
+    @OneToMany(mappedBy="pedido")
     private ArrayList<ItemPedido> itens;
 
     public Pedido() {
