@@ -1,0 +1,102 @@
+<ui:composition 
+	template="templateMenu.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui2="http://java.sun.com/jsf/facelets"
+	xmlns:tm="http://java.sun.com/jsf/composite/terminal/1_0/components">
+	
+	<ui:define name="title">
+		<h:outputText value="#{msg['pages.emitirPedido.title']}" />
+	</ui:define>
+	
+	<ui:define name="principal">
+	  
+	  	<h1><p:outputLabel value="#{msg['pages.emitirPedido.title']}"/></h1>
+	  
+	  	<h:form id="formPedido">
+	  		<p:outputLabel value="#{msg['pages.emitirPedido.dadosPedido']}" />
+	  		
+	  		<p:panelGrid columns="2">
+      			<p:outputLabel value="#{msg['pages.emitirPedido.numero']}" />
+      			<p:inputText value="#{pedidoBeans.pedido.numero}" />
+      			
+      			<p:outputLabel value="#{msg['pages.emitirPedido.dataEmissao']}" />
+      			<p:inputText value="#{pedidoBeans.pedido.dataEmissaoPedido}" />
+      			
+      			<p:outputLabel value="#{msg['pages.emitirPedido.cliente']}" />
+				<p:selectOneMenu value="#{pedidoBeans.cliente}" converter="converterCliente">
+					<f:selectItem itemValue="" itemLabel="#{msg['pages.emitirPedido.cliente.msg']}" />
+						<f:selectItems value="#{pedidoBeans.clientes}" var="aux"
+							itemValue="#{aux}" itemLabel="#{aux.nome}" />
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="#{msg['pages.emitirPedido.vendedor']}" />
+				<p:selectOneMenu value="#{pedidoBeans.vendedor}" converter="converterVendedor">
+					<f:selectItem itemValue="" itemLabel="#{msg['pages.emitirPedido.vendedor.msg']}" />
+						<f:selectItems value="#{pedidoBeans.vendedores}" var="aux"
+							itemValue="#{aux}" itemLabel="#{aux.nome}" />
+				</p:selectOneMenu>
+	  		</p:panelGrid>
+	  		
+	  		<br />
+	  		<p:outputLabel value="#{msg['pages.emitirPedido.produtos']}" />
+	  		
+	  		<p:panelGrid columns="2">
+      			<p:outputLabel value="#{msg['pages.emitirPedido.produto']}" />
+				<p:selectOneMenu value="#{itemPedidoBeans.produto}" converter="converterProduto">
+					<f:selectItem itemValue="" itemLabel="#{msg['pages.emitirPedido.produto.msg']}" />
+						<f:selectItems value="#{itemPedidoBeans.produtos}" var="aux"
+							itemValue="#{aux}" itemLabel="#{aux.descricao}" />
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="#{msg['pages.emitirPedido.qtde']}" />
+				<p:inputText value="#{itemPedidoBeans.item.qtdeVendida}" />
+				
+				<p:commandButton 	value="#{msg['pages.comuns.form.btnIncluir']}"
+									action="#{itemPedidoBeans.salvar}"
+									update=":formPedido" />
+	  		</p:panelGrid>
+	  		
+	  		<p:dataTable	value="#{pedidoBeans.itens}"
+                			var="aux"
+                			id="tabelaItens" >
+                			             			     			
+      			<p:column headerText="#{msg['pages.emitirPedido.codigo']}" style="width:160px">
+					<p:outputLabel value="#{aux.produto.codigo}"/>
+	  			</p:column>
+	  			
+	  			<p:column headerText="#{msg['pages.emitirPedido.descricao']}" style="width:160px">
+					<p:outputLabel value="#{aux.produto.descrica}"/>
+	  			</p:column>
+	  			
+	  			<p:column headerText="#{msg['pages.emitirPedido.precoUnit']}" style="width:160px">
+					<p:outputLabel value="#{aux.produto.precoUnit}"/>
+	  			</p:column>
+	  			
+	  			<p:column headerText="#{msg['pages.emitirPedido.qtdeVend']}" style="width:160px">
+					<p:outputLabel value="#{aux.qtdeVendida}"/>
+	  			</p:column>
+	  			
+	  			<p:column headerText="#{msg['pages.emitirPedido.subTotal']}" style="width:160px">
+					<p:outputLabel value="#{aux.qtdeVendida * aux.produto.precoUnit}"/>
+	  			</p:column>
+	  			
+			</p:dataTable>
+	  		
+	  		<p:panelGrid columns="2">
+      			<p:outputLabel value="#{msg['pages.emitirPedido.totalPedido']}" />
+      			<p:outputLabel value="Calcular o total" />
+	  		</p:panelGrid>
+	  		
+	  		<br />
+	  		
+	  		<p:commandButton 	value="#{msg['pages.comuns.form.btnSalvar']}"
+								action="#{pedidoBeans.salvar}"
+								update=":formPedido" />
+   		</h:form>
+   		
+	</ui:define>
+</ui:composition>

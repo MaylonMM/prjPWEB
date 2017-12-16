@@ -1,6 +1,8 @@
 package fatec.pweb.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -14,6 +16,7 @@ import javax.persistence.ManyToOne;
 public class ItemPedido {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
     private int numeroItem;
     private int qtdeVendida;
     private Pedido pedido;

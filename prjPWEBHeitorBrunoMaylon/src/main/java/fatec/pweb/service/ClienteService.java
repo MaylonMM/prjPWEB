@@ -31,4 +31,9 @@ public class ClienteService {
 		clienteDao.closeEntityManager();
 	}
 	
+	public Cliente consultar(Cliente cliente) {
+		cliente = clienteDao.getById(Cliente.class, cliente.getCpf());
+		clienteDao.closeEntityManager();
+		return cliente;
+	}
 }

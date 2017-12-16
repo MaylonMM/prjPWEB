@@ -50,4 +50,8 @@ public class ClienteBeans {
 		clientes.remove(cliente);
 	}
 	
+	public Cliente consultar(Cliente cliente) {
+		cliente = service.consultar(cliente);
+		return cliente;
+	}
 }

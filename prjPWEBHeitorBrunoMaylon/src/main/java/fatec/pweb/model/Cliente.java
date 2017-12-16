@@ -46,7 +46,6 @@ public class Cliente extends Pessoa {
 
     public void addPedido(Pedido ped) {
         pedidos.add(ped);
-        ped.setCliente(this);
     }
     
     
