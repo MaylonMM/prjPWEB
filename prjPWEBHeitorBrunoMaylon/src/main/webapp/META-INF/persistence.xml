@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="prjPWEBHeitorBrunoMaylon" transaction-type="RESOURCE_LOCAL">
-		<class>fatec.pweb.model.Pessoa</class>
 		<class>fatec.pweb.model.Cliente</class>
-		<class>fatec.pweb.model.Pedido</class>
-		<class>fatec.pweb.model.Vendedor</class>
 		<class>fatec.pweb.model.Produto</class>
+		<class>fatec.pweb.model.Vendedor</class>
+		<class>fatec.pweb.model.Pedido</class>
+		<class>fatec.pweb.model.Pessoa</class>
 		<class>fatec.pweb.model.ItemPedido</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/BD_prjPWEB;create=true"/>
