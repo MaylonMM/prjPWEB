@@ -1,0 +1,11 @@
+Durante a execução para demonstração ou correção do projeto de PWEB, 
+é possível que haja um erro e um mal funcionamento devido 
+à falta de um Tema implementado em nosso projeto.
+
+Caso isso ocorra será necessário seguir os seguintes passos:
+
+-- Realizar o download da pasta "themes" que se encontra no repositório https://github.com/MaylonMM/prjPWEB
+
+-- Inserir a pasta "themes" no seguinte caminho -> C:\Users\seu_usuario\.m2\repository\org\primefaces
+
+Após a execução dos passos anteriores, o projeto deve funcionar corretamente.
