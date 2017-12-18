@@ -98,4 +98,57 @@ public class Pessoa implements Serializable{
         this.telefone = telefone;
     }
     
+    public static boolean validaCPF(String CPF){       
+    	CPF = CPF.replace(".", "").replace("-", "");
+        int valid = 0;
+        String erro = "";
+        int numMult, i, result, numCpf;
+        
+        if(
+           CPF.equals("00000000000") || CPF.equals("11111111111") || CPF.equals("22222222222") ||           
+           CPF.equals("33333333333") || CPF.equals("33333333333") || CPF.equals("44444444444") ||
+           CPF.equals("55555555555") || CPF.equals("66666666666") || CPF.equals("77777777777") ||
+           CPF.equals("88888888888") || CPF.equals("99999999999") || CPF.length() != 11){
+            return false;
+        }
+        
+        numMult = 10;
+        i = 0;
+        result = 0;
+        while (numMult >= 2) {
+            numCpf = Integer.parseInt(CPF.substring(i,i+1));
+            result = result + numCpf * numMult;
+            numMult -= 1;
+            i += 1;
+        }
+        result = result * 10;
+        result = result % 11;
+        if (result == 10) {
+            result = 0;
+        }
+        if (result == Integer.parseInt(CPF.substring(9,10))) {
+            numMult = 11;
+            i = 0;
+            result = 0;
+            while (numMult >= 2) {
+                numCpf = Integer.parseInt(CPF.substring(i,i+1));
+                result = result + numCpf * numMult;
+                numMult -= 1;
+                i += 1;
+            }
+            result = result * 10;
+            result = result % 11;
+            if (result == 10) {
+                result = 0;
+            }
+            if (result == Integer.parseInt(CPF.substring(10,11))) {
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
+    
 }

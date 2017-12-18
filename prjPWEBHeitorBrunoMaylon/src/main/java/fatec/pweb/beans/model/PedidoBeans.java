@@ -24,14 +24,14 @@ import fatec.pweb.service.VendedorService;
 @SessionScoped
 public class PedidoBeans {
 	private Pedido pedido = new Pedido();
-	private List<Pedido> pedidos;
+	private List<Pedido> pedidos = new ArrayList<Pedido>();
 	private PedidoService service = new PedidoService();
 	private double valorTotal = 0.00;
 	
-	private Cliente cliente;
+	private Cliente cliente = new Cliente();
 	private ClienteService ServiceCli = new ClienteService();
 	
-	private Vendedor vendedor;
+	private Vendedor vendedor = new Vendedor();
 	private VendedorService ServiceVend = new VendedorService();
 	
 	private ItemPedido item = new ItemPedido();
@@ -163,5 +163,6 @@ public class PedidoBeans {
 	public void setValorTotal(double valorTotal) {
 		this.valorTotal = valorTotal;
 	}
+	
 	
 }

@@ -1,11 +1,17 @@
 package fatec.pweb.beans.model;
 
 import java.util.List;
+
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.validation.ValidationException;
+
 import org.primefaces.event.RowEditEvent;
 
 import fatec.pweb.model.Cliente;
+import fatec.pweb.model.Pessoa;
 import fatec.pweb.service.ClienteService;
 
 @ManagedBean
@@ -22,12 +28,18 @@ public class ClienteBeans {
 	}
 	
 	public void salvar() {
-		cliente = service.salvar(cliente);
+		if (!Pessoa.validaCPF(cliente.getCpf())){
+			FacesContext context = FacesContext.getCurrentInstance();
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid CPF",cliente.getCpf()) );
+		} else {
+			cliente = service.salvar(cliente);
+			
+			if (clientes != null)
+				clientes.add(cliente);
+			
+			cliente = new Cliente();
+		}
 		
-		if (clientes != null)
-			clientes.add(cliente);
-		
-		cliente = new Cliente();
 	}
 	
 	public Cliente getCliente() {

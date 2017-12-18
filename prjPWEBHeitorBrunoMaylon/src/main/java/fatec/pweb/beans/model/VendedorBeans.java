@@ -2,11 +2,15 @@ package fatec.pweb.beans.model;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.validation.ValidationException;
 
 import org.primefaces.event.RowEditEvent;
 
+import fatec.pweb.model.Pessoa;
 import fatec.pweb.model.Vendedor;
 import fatec.pweb.service.VendedorService;
 
@@ -23,12 +27,17 @@ public class VendedorBeans {
 	}
 	
 	public void salvar() {
-		vendedor = service.salvar(vendedor);
-		
-		if (vendedores != null)
-			vendedores.add(vendedor);
-		
-		vendedor = new Vendedor();
+		if (!Pessoa.validaCPF(vendedor.getCpf())){
+			FacesContext context = FacesContext.getCurrentInstance();
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid CPF",vendedor.getCpf()) );
+		} else {
+			vendedor = service.salvar(vendedor);
+			
+			if (vendedores != null)
+				vendedores.add(vendedor);
+			
+			vendedor = new Vendedor();
+		}
 	}
 
 	public Vendedor getVendedor() {

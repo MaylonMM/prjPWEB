@@ -35,14 +35,14 @@
       		<p:outputLabel value="#{msg['pages.emitirPedido.dadosCompradorVend']}" />
       		<p:panelGrid columns="2">
       			<p:outputLabel value="#{msg['pages.emitirPedido.cliente']}" />
-				<p:selectOneMenu value="#{pedidoBeans.pedido.cliente}" converter="converterCliente">
+				<p:selectOneMenu value="#{pedidoBeans.cliente}" converter="converterCliente">
 					<f:selectItem itemValue="" itemLabel="#{msg['pages.emitirPedido.cliente.msg']}" />
 						<f:selectItems value="#{clienteBeans.clientes}" var="aux"
 							itemValue="#{aux}" itemLabel="#{aux.nome}" />
 				</p:selectOneMenu>
 				
 				<p:outputLabel value="#{msg['pages.emitirPedido.vendedor']}" />
-				<p:selectOneMenu value="#{pedidoBeans.pedido.vendedor}" converter="converterVendedor">
+				<p:selectOneMenu value="#{pedidoBeans.vendedor}" converter="converterVendedor">
 					<f:selectItem itemValue="" itemLabel="#{msg['pages.emitirPedido.vendedor.msg']}" />
 						<f:selectItems value="#{vendedorBeans.vendedores}" var="aux"
 							itemValue="#{aux}" itemLabel="#{aux.nome}" />

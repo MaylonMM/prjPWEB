@@ -17,6 +17,8 @@
 	  	<h1><p:outputLabel value="#{msg['pages.cadastroVendedor.title']}"/></h1>
 	  
 	  	<h:form id="formVendedor">	
+	  		<p:growl id="growl" showDetail="true" />
+	  	
 	  		<p:panelGrid columns="2">
       			<p:outputLabel value="#{msg['pages.cadastroVendedor.cpf']}" />
       			<p:inputText value="#{vendedorBeans.vendedor.cpf}"/>
