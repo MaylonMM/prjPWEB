@@ -60,7 +60,7 @@ public class PedidoBeans {
 		
 		cliente = pedido.getCliente();
 		//cliente.setLimiteDisp(cliente.getLimiteDisp() - valorTotal);
-		ServiceCli.alterar(cliente);
+		//ServiceCli.alterar(cliente);
 		
 		if (pedidos != null)
 			pedidos.add(pedido);
