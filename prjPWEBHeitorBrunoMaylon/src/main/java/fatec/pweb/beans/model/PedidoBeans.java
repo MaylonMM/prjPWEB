@@ -59,7 +59,7 @@ public class PedidoBeans {
 		}
 		
 		cliente = pedido.getCliente();
-		cliente.setLimiteDisp(cliente.getLimiteDisp() - valorTotal);
+		//cliente.setLimiteDisp(cliente.getLimiteDisp() - valorTotal);
 		ServiceCli.alterar(cliente);
 		
 		if (pedidos != null)
@@ -75,11 +75,7 @@ public class PedidoBeans {
 	public void addItem() {
 		item.setPedido(pedido);
 		pedido.addItem(item);
-		System.out.println("Ola");
-		System.out.println(item.getProduto().getDescricao());
-		System.out.println(pedido.getItens().get(pedido.getItens().size() - 1).getProduto().getDescricao());
 		valorTotal += item.getQtdeVendida() * item.getProduto().getPrecoUnit();
-		valorTotal += 10;
 		item = new ItemPedido();
 	}
 	

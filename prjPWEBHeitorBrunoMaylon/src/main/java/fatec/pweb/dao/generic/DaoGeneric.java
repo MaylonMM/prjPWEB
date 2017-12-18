@@ -53,6 +53,7 @@ public class DaoGeneric <T, I extends Serializable> {
 		return em;
 	}
 	
+	
 	public void closeEntityManager() {
 		if(em != null)
 			em.close();

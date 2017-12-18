@@ -26,6 +26,14 @@
       			<p:outputLabel value="#{msg['pages.emitirPedido.dataEmissao']}" />
       			<p:inputText value="#{pedidoBeans.pedido.dataEmissaoPedido}" />
       			
+      			<p:outputLabel value="#{msg['pages.emitirPedido.dataPagamento']}" />
+      			<p:inputText value="#{pedidoBeans.pedido.dataPagto}" />
+      			
+      		</p:panelGrid>
+      		<br/>
+      		
+      		<p:outputLabel value="#{msg['pages.emitirPedido.dadosCompradorVend']}" />
+      		<p:panelGrid columns="2">
       			<p:outputLabel value="#{msg['pages.emitirPedido.cliente']}" />
 				<p:selectOneMenu value="#{pedidoBeans.pedido.cliente}" converter="converterCliente">
 					<f:selectItem itemValue="" itemLabel="#{msg['pages.emitirPedido.cliente.msg']}" />
@@ -56,19 +64,24 @@
 				<p:inputText value="#{pedidoBeans.item.qtdeVendida}" />
 				
 	  		</p:panelGrid>
-	  		
+	  		<br/>
 	  		<p:commandButton 	value="#{msg['pages.comuns.form.btnIncluir']}"
 								action="#{pedidoBeans.addItem}"
-								update="@all" />
+								immediate="true"
+								update=":formPedido" />
 								
 			<p:commandButton 	value="#{msg['pages.comuns.form.btnRemover']}"
 								action="#{pedidoBeans.removerItem}"
-								update="@all" />
+								immediate="true"
+								update=":formPedido" />
 								
 			<p:commandButton 	value="#{msg['pages.comuns.form.btnAlterar']}"
 								action="#{pedidoBeans.alterarItem}"
-								update="@all" />
+								immediate="true"
+								update=":formPedido" />
 	  		
+	  		<br/>
+	  		<br/>
 	  		<p:dataTable	value="#{pedidoBeans.pedido.itens}"
                 			var="aux"
                 			id="tabelaItens" >
@@ -82,7 +95,9 @@
 	  			</p:column>
 	  			
 	  			<p:column headerText="#{msg['pages.emitirPedido.precoUnit']}" style="width:160px">
-					<p:outputLabel value="#{aux.produto.precoUnit}"/>
+					<p:outputLabel value="#{aux.produto.precoUnit}" >
+						<f:convertNumber pattern="R$ #,##0.00" />
+					</p:outputLabel>
 	  			</p:column>
 	  			
 	  			<p:column headerText="#{msg['pages.emitirPedido.qtdeVend']}" style="width:160px">
@@ -90,11 +105,14 @@
 	  			</p:column>
 	  			
 	  			<p:column headerText="#{msg['pages.emitirPedido.subTotal']}" style="width:160px">
-					<p:outputLabel value="#{aux.qtdeVendida * aux.produto.precoUnit}"/>
+					<p:outputLabel value="#{aux.qtdeVendida * aux.produto.precoUnit}" >
+						<f:convertNumber pattern="R$ #,##0.00" />
+					</p:outputLabel>
 	  			</p:column>
 	  			
 			</p:dataTable>
 	  		
+	  		<br/>
 	  		<p:panelGrid columns="2" id="valorTotal">
       			<p:outputLabel value="#{msg['pages.emitirPedido.totalPedido']}" />
       			<p:outputLabel value="#{pedidoBeans.valorTotal}" >
@@ -102,10 +120,11 @@
       			</p:outputLabel>
 	  		</p:panelGrid>
 	  		
-	  		<br />
+	  		<br/>
 	  		
 	  		<p:commandButton 	value="#{msg['pages.comuns.form.btnSalvar']}"
 								action="#{pedidoBeans.salvar}"
+								immediate="true"
 								update=":formPedido" />
    		</h:form>
    		

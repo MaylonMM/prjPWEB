@@ -30,4 +30,8 @@ public class VendedorService {
 		vendedorDao.remove(vendedor);
 		vendedorDao.closeEntityManager();
 	}
+	
+	public Vendedor getUserById(String id) {
+		return vendedorDao.getById(Vendedor.class, id);
+	}
 }

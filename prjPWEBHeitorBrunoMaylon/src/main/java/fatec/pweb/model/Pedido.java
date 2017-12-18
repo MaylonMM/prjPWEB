@@ -57,7 +57,6 @@ public class Pedido {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-        cliente.addPedido(this);
     }
     
     public String getDataPagto() {
@@ -78,7 +77,6 @@ public class Pedido {
     
     public void addItem(ItemPedido item) {
         itens.add(item);
-        cliente.setLimiteDisp(cliente.getLimiteDisp() - (item.getProduto().getPrecoUnit() * item.getQtdeVendida()));
     }
 
     public Vendedor getVendedor() {
@@ -87,7 +85,6 @@ public class Pedido {
 
     public void setVendedor(Vendedor vendedor) {
         this.vendedor = vendedor;
-        vendedor.addPedido(this);
     }
 
 	public void setNumero(int numero) {

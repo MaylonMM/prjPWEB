@@ -36,4 +36,8 @@ public class ClienteService {
 		clienteDao.closeEntityManager();
 		return cliente;
 	}
+	
+	public Cliente getUserById(String id) {
+		return clienteDao.getById(Cliente.class, id);
+	}
 }

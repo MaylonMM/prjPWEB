@@ -30,4 +30,8 @@ public class ProdutoService {
 		produtoDao.remove(produto);
 		produtoDao.closeEntityManager();
 	}
+	
+	public Produto getProdById(int id) {
+		return produtoDao.getById(Produto.class, id);
+	}
 }
