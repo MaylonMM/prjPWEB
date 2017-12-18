@@ -45,7 +45,6 @@ public class ItemPedido {
 
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
-        pedido.addItem(this);
     }
 
     public Produto getProduto() {

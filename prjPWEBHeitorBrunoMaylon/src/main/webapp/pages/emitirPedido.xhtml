@@ -27,16 +27,16 @@
       			<p:inputText value="#{pedidoBeans.pedido.dataEmissaoPedido}" />
       			
       			<p:outputLabel value="#{msg['pages.emitirPedido.cliente']}" />
-				<p:selectOneMenu value="#{pedidoBeans.cliente}" converter="converterCliente">
+				<p:selectOneMenu value="#{pedidoBeans.pedido.cliente}" converter="converterCliente">
 					<f:selectItem itemValue="" itemLabel="#{msg['pages.emitirPedido.cliente.msg']}" />
-						<f:selectItems value="#{pedidoBeans.clientes}" var="aux"
+						<f:selectItems value="#{clienteBeans.clientes}" var="aux"
 							itemValue="#{aux}" itemLabel="#{aux.nome}" />
 				</p:selectOneMenu>
 				
 				<p:outputLabel value="#{msg['pages.emitirPedido.vendedor']}" />
-				<p:selectOneMenu value="#{pedidoBeans.vendedor}" converter="converterVendedor">
+				<p:selectOneMenu value="#{pedidoBeans.pedido.vendedor}" converter="converterVendedor">
 					<f:selectItem itemValue="" itemLabel="#{msg['pages.emitirPedido.vendedor.msg']}" />
-						<f:selectItems value="#{pedidoBeans.vendedores}" var="aux"
+						<f:selectItems value="#{vendedorBeans.vendedores}" var="aux"
 							itemValue="#{aux}" itemLabel="#{aux.nome}" />
 				</p:selectOneMenu>
 	  		</p:panelGrid>
@@ -46,21 +46,30 @@
 	  		
 	  		<p:panelGrid columns="2">
       			<p:outputLabel value="#{msg['pages.emitirPedido.produto']}" />
-				<p:selectOneMenu value="#{itemPedidoBeans.produto}" converter="converterProduto">
+				<p:selectOneMenu value="#{pedidoBeans.item.produto}" converter="converterProduto">
 					<f:selectItem itemValue="" itemLabel="#{msg['pages.emitirPedido.produto.msg']}" />
-						<f:selectItems value="#{itemPedidoBeans.produtos}" var="aux"
+						<f:selectItems value="#{produtoBeans.produtos}" var="aux"
 							itemValue="#{aux}" itemLabel="#{aux.descricao}" />
 				</p:selectOneMenu>
 				
 				<p:outputLabel value="#{msg['pages.emitirPedido.qtde']}" />
-				<p:inputText value="#{itemPedidoBeans.item.qtdeVendida}" />
+				<p:inputText value="#{pedidoBeans.item.qtdeVendida}" />
 				
-				<p:commandButton 	value="#{msg['pages.comuns.form.btnIncluir']}"
-									action="#{itemPedidoBeans.salvar}"
-									update=":formPedido" />
 	  		</p:panelGrid>
 	  		
-	  		<p:dataTable	value="#{pedidoBeans.itens}"
+	  		<p:commandButton 	value="#{msg['pages.comuns.form.btnIncluir']}"
+								action="#{pedidoBeans.addItem}"
+								update="@all" />
+								
+			<p:commandButton 	value="#{msg['pages.comuns.form.btnRemover']}"
+								action="#{pedidoBeans.removerItem}"
+								update="@all" />
+								
+			<p:commandButton 	value="#{msg['pages.comuns.form.btnAlterar']}"
+								action="#{pedidoBeans.alterarItem}"
+								update="@all" />
+	  		
+	  		<p:dataTable	value="#{pedidoBeans.pedido.itens}"
                 			var="aux"
                 			id="tabelaItens" >
                 			             			     			
@@ -86,9 +95,11 @@
 	  			
 			</p:dataTable>
 	  		
-	  		<p:panelGrid columns="2">
+	  		<p:panelGrid columns="2" id="valorTotal">
       			<p:outputLabel value="#{msg['pages.emitirPedido.totalPedido']}" />
-      			<p:outputLabel value="Calcular o total" />
+      			<p:outputLabel value="#{pedidoBeans.valorTotal}" >
+      				<f:convertNumber pattern="R$ #,##0.00" />
+      			</p:outputLabel>
 	  		</p:panelGrid>
 	  		
 	  		<br />

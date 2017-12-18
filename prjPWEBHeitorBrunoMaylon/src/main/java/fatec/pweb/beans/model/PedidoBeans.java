@@ -1,8 +1,10 @@
 package fatec.pweb.beans.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.RowEditEvent;
@@ -10,18 +12,21 @@ import org.primefaces.event.RowEditEvent;
 import fatec.pweb.model.Cliente;
 import fatec.pweb.model.ItemPedido;
 import fatec.pweb.model.Pedido;
+import fatec.pweb.model.Produto;
 import fatec.pweb.model.Vendedor;
 import fatec.pweb.service.ClienteService;
 import fatec.pweb.service.ItemPedidoService;
 import fatec.pweb.service.PedidoService;
+import fatec.pweb.service.ProdutoService;
 import fatec.pweb.service.VendedorService;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class PedidoBeans {
 	private Pedido pedido = new Pedido();
 	private List<Pedido> pedidos;
 	private PedidoService service = new PedidoService();
+	private double valorTotal = 0.00;
 	
 	private Cliente cliente;
 	private ClienteService ServiceCli = new ClienteService();
@@ -29,8 +34,13 @@ public class PedidoBeans {
 	private Vendedor vendedor;
 	private VendedorService ServiceVend = new VendedorService();
 	
-	private ItemPedido item;
+	private ItemPedido item = new ItemPedido();
 	private ItemPedidoService ServiceItem = new ItemPedidoService();
+	private List<ItemPedido> itens = new ArrayList<>();
+	private ItemPedido itemSelec = new ItemPedido();
+	
+	private Produto produto = new Produto();
+	private ProdutoService serviceProduto = new ProdutoService();
 	
 	public void onRowEdit(RowEditEvent event) {
 		Pedido p = ((Pedido) event.getObject());
@@ -43,12 +53,56 @@ public class PedidoBeans {
 		
 		pedido = service.salvar(pedido);
 		
+		for (ItemPedido i : itens) {
+			i = ServiceItem.salvar(i);
+			produto = serviceProduto.salvar(i.getProduto());
+		}
+		
+		cliente = pedido.getCliente();
+		cliente.setLimiteDisp(cliente.getLimiteDisp() - valorTotal);
+		ServiceCli.alterar(cliente);
+		
 		if (pedidos != null)
 			pedidos.add(pedido);
 		
 		pedido = new Pedido();
+		itens = new ArrayList<>();
 		cliente = null;
 		vendedor = null;
+		valorTotal = 0;
+	}
+	
+	public void addItem() {
+		item.setPedido(pedido);
+		pedido.addItem(item);
+		System.out.println("Ola");
+		System.out.println(item.getProduto().getDescricao());
+		System.out.println(pedido.getItens().get(pedido.getItens().size() - 1).getProduto().getDescricao());
+		valorTotal += item.getQtdeVendida() * item.getProduto().getPrecoUnit();
+		valorTotal += 10;
+		item = new ItemPedido();
+	}
+	
+	public void removerItem(ItemPedido i) {
+		itens.remove(i);
+		valorTotal -= i.getQtdeVendida() * i.getProduto().getPrecoUnit();
+		retirarItem();
+	}
+	
+	public void alterarItem() {
+		itens.remove(itemSelec);
+		valorTotal -= itemSelec.getQtdeVendida() * itemSelec.getProduto().getPrecoUnit();
+		itemSelec = new ItemPedido();
+		
+		itens.add(item);
+		valorTotal += item.getQtdeVendida() * item.getProduto().getPrecoUnit();
+		item = new ItemPedido();
+		retirarItem();
+	}
+	
+	public void retirarItem() {
+		item = new ItemPedido();
+		itemSelec = new ItemPedido();
 	}
 
 	public Pedido getPedido() {
@@ -105,4 +159,13 @@ public class PedidoBeans {
 	public List<ItemPedido> getItens() {
 		return ServiceItem.getItens();
 	}
+
+	public double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+	
 }

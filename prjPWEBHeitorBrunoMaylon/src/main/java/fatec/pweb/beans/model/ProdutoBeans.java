@@ -3,6 +3,7 @@ package fatec.pweb.beans.model;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.RowEditEvent;
@@ -11,7 +12,7 @@ import fatec.pweb.model.Produto;
 import fatec.pweb.service.ProdutoService;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class ProdutoBeans {
 	private Produto produto = new Produto();
 	private List<Produto> produtos;
